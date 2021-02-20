@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "author": "Ahmad Safar",
   "license": "MIT",
+  "homepage": "./",
   "private": true,
   "dependencies": {
     "@craco/craco": "^6.1.1",
