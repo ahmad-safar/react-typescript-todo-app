@@ -4,19 +4,37 @@ import { AddTodoForm } from './AddTodoForm'
 
 const initialTodos: Todo[] = [
   {
-    text: 'Walk the dog',
+    text: 'Jalan-jalan sama doi',
     complete: false,
   },
   {
-    text: 'Write app',
+    text: 'Lari keliling komplek',
     complete: true,
   },
 ]
 
 function App () {
-  const [todos, setTodos] = useState(initialTodos)
+  const localStorageTodos = (): Todo[] => {
+    let todos = initialTodos
 
-  const toggleTodo = (selectedTodo: Todo) => {
+    const localTodos = localStorage.getItem('todos')
+    if (localTodos === null) {
+      localStorage.setItem('todos', JSON.stringify(todos))
+    } else {
+      todos = JSON.parse(localStorage.getItem('todos')!)
+    }
+
+    return todos
+  }
+
+  const [todos, setTodos] = useState(localStorageTodos)
+
+  const updateTodos = (todos: Todo[]): void => {
+    setTodos(todos)
+    localStorage.setItem('todos', JSON.stringify(todos))
+  }
+
+  const toggleTodo = (selectedTodo: Todo): void => {
     const newTodos = todos.map(todo => {
       if (todo === selectedTodo) {
         return {
@@ -26,12 +44,13 @@ function App () {
       }
       return todo
     })
-    setTodos(newTodos)
+    updateTodos(newTodos)
   }
 
   const addTodo: AddTodo = (text: string) => {
     const newTodo = { text, complete: false }
-    setTodos([...todos, newTodo])
+    const newTodos = [...todos, newTodo]
+    updateTodos(newTodos)
   }
 
   return (

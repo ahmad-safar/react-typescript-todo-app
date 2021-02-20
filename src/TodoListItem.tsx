@@ -11,7 +11,7 @@ export const TodoListItem = ({ todo, toggleTodo }: Props) => {
             >
                 <input
                     type="checkbox"
-                    checked={todo.complete}
+                    defaultChecked={todo.complete}
                     onClick={() => toggleTodo(todo)}
                 />
                 {' '}{todo.text}
