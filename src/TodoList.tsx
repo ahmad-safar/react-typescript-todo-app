@@ -1,4 +1,3 @@
-import React from 'react'
 import { TodoListItem } from './TodoListItem'
 
 interface Props {
@@ -6,7 +5,7 @@ interface Props {
     toggleTodo: ToggleTodo
 }
 
-export const TodoList: React.FC<Props> = ({ todos, toggleTodo }) => {
+export const TodoList = ({ todos, toggleTodo }: Props) => {
     return (
         <ul>
             {todos.map(todo => (
